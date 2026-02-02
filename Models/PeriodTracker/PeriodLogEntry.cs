@@ -1,4 +1,8 @@
 ﻿
+using Newtonsoft.Json;
+using OvulaeShared.Helpers.Converters;
+using OvulaeShared.Models.Shared.Logs;
+
 namespace OvulaeShared.Models.PeriodTracker
 {
     public class PeriodLogEntry
@@ -27,10 +31,6 @@ namespace OvulaeShared.Models.PeriodTracker
         public string PainLevel { get; set; }                // e.g., "😣 Mild", "🤯 Severe"
         public bool HasPain => !string.IsNullOrEmpty(PainLevel) && !PainLevel.Contains("None", StringComparison.OrdinalIgnoreCase);
 
-        // 💊 Medications Taken Today
-        public bool UsedMedication { get; set; }
-        public List<string> Medications { get; set; } = new();
-        public string? MedicationMethodNotes { get; set; }
 
         // 🧠 Daily Health & Symptoms
         public List<string> Moods { get; set; } = new();
@@ -71,7 +71,61 @@ namespace OvulaeShared.Models.PeriodTracker
         public bool? HadBowelMovements { get; set; }
         public string? BowelMovementsFrequency { get; set; }
 
+        [JsonConverter(typeof(MedicationListConverter))]
+        public List<MedicationModel> Medications { get; set; } = new();
+
+        public string MedicationNotes { get; set; }
+
         public string? DoctorsNotes { get; set; }
         public DateTime? DoctorResponseTime { get; set; }
+
+        // PCOS Tracking Properties
+        [JsonConverter(typeof(MedicationListConverter))]
+        public List<MedicationModel> PcosMedications { get; set; } = new();
+        public double PcosWaistMeasurement { get; set; }
+        public double PcosHipMeasurement { get; set; }
+        public double PcosWaistCircumference { get; set; }
+        public double PcosWeight { get; set; }
+        public DateTime PcosWeightDate { get; set; }
+        public string PcosWeightNotes { get; set; } = "";
+        public List<string> PcosSymptoms { get; set; } = new();
+        public string PcosAdditionalSymptomsNotes { get; set; } = "";
+        public string PcosSymptomsNotes { get; set; } = "";
+        public int PcosSymptomsRating { get; set; }
+
+        // Endometriosis Tracking Properties
+        [JsonConverter(typeof(MedicationListConverter))]
+        public List<MedicationModel> EndoMedications { get; set; } = new();
+        public int EndoPainRating { get; set; }
+        public string EndoPainComments { get; set; } = "";
+        public string EndoPainLocation { get; set; } = "";
+        public string EndoPainDuration { get; set; } = "";
+        public double EndoWaistMeasurement { get; set; }
+        public double EndoHipMeasurement { get; set; }
+        public double EndoWaistCircumference { get; set; }
+        public double EndoWeight { get; set; }
+        public DateTime EndoWeightDate { get; set; }
+        public string EndoWeightNotes { get; set; } = "";
+
+        // Helper properties for UI
+        public bool HasPcosTracking => PcosMedications.Any() ||
+                                       PcosWaistMeasurement > 0 ||
+                                       PcosHipMeasurement > 0 ||
+                                       PcosWaistCircumference > 0 ||
+                                       PcosWeight > 0 ||
+                                       PcosSymptoms.Any() ||
+                                       !string.IsNullOrEmpty(PcosWeightNotes) ||
+                                       !string.IsNullOrEmpty(PcosAdditionalSymptomsNotes);
+
+        public bool HasEndoTracking => EndoMedications.Any() ||
+                                       EndoPainRating > 0 ||
+                                       EndoWaistMeasurement > 0 ||
+                                       EndoHipMeasurement > 0 ||
+                                       EndoWaistCircumference > 0 ||
+                                       EndoWeight > 0 ||
+                                       !string.IsNullOrEmpty(EndoPainComments) ||
+                                       !string.IsNullOrEmpty(EndoPainLocation) ||
+                                       !string.IsNullOrEmpty(EndoPainDuration) ||
+                                       !string.IsNullOrEmpty(EndoWeightNotes);
     }
 }

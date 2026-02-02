@@ -21,6 +21,12 @@ namespace OvulaeShared.Helpers.API
             public const string VERIFY_EMAIL = "Auth/VerifyEmail";
         }
 
+        //AUTH
+        public static class APP
+        {
+            public const string VERSION_CHECK = "App/VersionCheck";
+        }
+
         //User
         public static class USER
         {

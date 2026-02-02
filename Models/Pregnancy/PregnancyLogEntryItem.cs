@@ -1,4 +1,8 @@
 ﻿
+using Newtonsoft.Json;
+using OvulaeShared.Helpers.Converters;
+using OvulaeShared.Models.Shared.Logs;
+
 namespace OvulaeShared.Models.Pregnancy
 {
     public class PregnancyLogEntryItem
@@ -91,7 +95,12 @@ namespace OvulaeShared.Models.Pregnancy
         public bool? BloodPressureDaily { get; set; }
         public string? BloodPressureReadings { get; set; }
         public bool? OnBloodPressureMedication { get; set; }
-        
+
+        [JsonConverter(typeof(MedicationListConverter))]
+        public List<MedicationModel> Medication { get; set; } = new();
+
+        public string MedicationNotes { get; set; }
+
         public string? BrestFeeling { get; set; }
         public int? BrestFeelingRating { get; set; }
         public string? BrestFeelingNotes { get; set; }

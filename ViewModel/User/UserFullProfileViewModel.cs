@@ -1,4 +1,5 @@
-﻿using OvulaeShared.Models.User;
+﻿using OvulaeShared.Models.Notifications;
+using OvulaeShared.Models.User;
 using OvulaeShared.ViewModel.Affiliates;
 
 namespace OvulaeShared.ViewModel.User
@@ -16,6 +17,8 @@ namespace OvulaeShared.ViewModel.User
         public UserPartnerViewModel PartnerDetails { get; set; }
 
         public AffiliateOverviewDetails AffiliateDetailsOverview { get; set; }
+
+        public NotificationSettings NotificationSettings { get; set; }
 
         public string AffiliateJoinLink { get; set; }
     }

@@ -18,13 +18,19 @@ namespace OvulaeShared.Services.APIs.Interface
 
         public WebInterfaceApiService(string apiBaseAddress)
         {
-            httpClient = new HttpClient();
+            httpClient = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(5)
+            };
             httpClient.BaseAddress = new Uri(apiBaseAddress);
         }
 
         public WebInterfaceApiService()
         {
-            httpClient = new HttpClient();
+            httpClient = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(5) 
+            };
             httpClient.BaseAddress = new Uri(OvulaeApiEndPoints.BASE_ADDRESS);
         }
 

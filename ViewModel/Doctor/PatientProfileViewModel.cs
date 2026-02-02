@@ -29,5 +29,8 @@ namespace OvulaeShared.ViewModel.Doctor
         // Additional data
         public List<BabyDetailsLog> BabyDetails { get; set; } = new();
         public PregnancyTrackerLog CurrentPregnancy { get; set; }
+
+        public DateTime FilterStartDate { get; set; } = DateTime.Today.AddDays(-30); // Default: last 30 days
+        public DateTime FilterEndDate { get; set; } = DateTime.Today;
     }
 }

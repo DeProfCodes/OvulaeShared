@@ -1,4 +1,8 @@
 ﻿
+using Newtonsoft.Json;
+using OvulaeShared.Helpers.Converters;
+using OvulaeShared.Models.Shared.Logs;
+
 namespace OvulaeShared.Models.Menopause
 {
     public class MenopauseLogEntry
@@ -66,11 +70,19 @@ namespace OvulaeShared.Models.Menopause
 
         public bool? BlemishShowing { get; set; }
 
+        [JsonConverter(typeof(MedicationListConverter))]
+        public List<MedicationModel> Medications { get; set; } = new();
+
+        public string MedicationNotes { get; set; }
+
         // Blood Pressure Monitoring
         public bool? BloodPressureDaily { get; set; }
         public string? BloodPressureReadings { get; set; }
 
         public string? DoctorsNotes { get; set; }
         public DateTime? DoctorResponseTime { get; set; }
+
+        public TimeSpan? SleepTime { get; set; }       // When you went to bed
+        public TimeSpan? WakeTime { get; set; }
     }
 }

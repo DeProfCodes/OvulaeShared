@@ -83,15 +83,22 @@ namespace OvulaeShared.Models.User
 
         // Menstrual cycle tracking
         public bool? UsedHPVvaccine { get; set; }
+        public string? HPVName { get; set; }
+        public DateTime? HPVDate { get; set; }
+
         public string? UsingTampon { get; set; }
+        
         public int? PCOSYears { get; set; }
         public int? PCOSMonths { get; set; }
         public bool? PCOSDiet { get; set; }
+        
         public int? EndometriosisYears { get; set; }
         public int? EndometriosisMonths { get; set; }
         public bool? EndometriosisDiet { get; set; }
 
         public DateTime? LastBreastExamDate { get; set; }
+
+        public DateTime? NextAppointmentDate { get; set; }
 
         // Meta
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
